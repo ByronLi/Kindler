@@ -2,6 +2,7 @@ package csci310.plshireus.org.kindler;
 
 import org.junit.Test;
 
+import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.*;
 
 /**

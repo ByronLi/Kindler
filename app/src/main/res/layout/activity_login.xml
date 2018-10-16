@@ -37,10 +37,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_email"
-                        android:textColorHint="@color/colorAccent"
+                        android:textColorHint="@color/defaultText"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
-                        android:textColor="@color/colorAccent"
+                        android:textColor="@color/defaultText"
                         android:singleLine="true"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -59,8 +59,8 @@
                         android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:textColorHint="@color/colorAccent"
-                        android:textColor="@color/colorAccent"
+                        android:textColorHint="@color/defaultText"
+                        android:textColor="@color/defaultText"
                         android:singleLine="true"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:background="@color/colorPrimaryDark"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorPrimary"
                     android:text="@string/action_sign_in"
                     android:textSize="20dp"
                     android:textStyle="bold"
