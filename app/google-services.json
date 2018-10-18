@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "782898414439",
+    "firebase_url": "https://kindler-2e035.firebaseio.com",
+    "project_id": "kindler-2e035",
+    "storage_bucket": "kindler-2e035.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782898414439:android:81dbc0888a0ef135",
+        "android_client_info": {
+          "package_name": "csci310.plshireus.org.kindler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782898414439-8sps4fmbugnvgu6hub16o7k39h3dgqcr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxUhzhNHBxAT1-B1K0jnVZRFhezTh1Gcg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
