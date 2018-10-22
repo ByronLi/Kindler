@@ -20,6 +20,7 @@ public class CreateBook extends AppCompatActivity {
     EditText bookAuthor;
     Spinner genreSpinner;
     EditText bookPrice;
+    EditText bookImage;
 
 
     @Override
@@ -39,6 +40,7 @@ public class CreateBook extends AppCompatActivity {
         bookTitle = (EditText) findViewById(R.id.bookName);
         bookAuthor = (EditText) findViewById(R.id.authorName);
         bookPrice = (EditText) findViewById(R.id.bookPrice);
+        bookImage = (EditText) findViewById(R.id.bookImageUrlEditText);
 
         createListing = (Button) findViewById(R.id.createBookButton);
         createListing.setOnClickListener(new View.OnClickListener() {
@@ -51,12 +53,13 @@ public class CreateBook extends AppCompatActivity {
                     String genre = genreSpinner.getSelectedItem().toString();
                     String uid = FirebaseAuth.getInstance().getUid();
                     double price = Double.valueOf(bookPrice.getText().toString());
+                    String url = bookImage.getText().toString();
 
-                    Book b = new Book(uid, title, author, genre, price);
+                    Book b = new Book(uid, title, author, genre, price, url);
                     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                     DatabaseReference ref = firebaseDatabase.getReference("books");
-                    ref.push();
-                    ref.setValue(b);
+                    DatabaseReference bookRef = ref.push();
+                    bookRef.setValue(b);
 
                     finish();
                 }

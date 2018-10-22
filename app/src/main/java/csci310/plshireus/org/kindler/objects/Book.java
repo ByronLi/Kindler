@@ -2,6 +2,22 @@ package csci310.plshireus.org.kindler.objects;
 
 public class Book {
 
+    private String ownerUID;
+    private String title;
+    private String author;
+    private String genre;
+    private double price;
+    private String imageURL;
+
+    public Book(String ownerUID, String title, String author, String genre, double price, String imageURL) {
+        this.ownerUID = ownerUID;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.price = price;
+        this.imageURL = imageURL;
+    }
+
     public String getOwnerUID() {
         return ownerUID;
     }
@@ -10,21 +26,13 @@ public class Book {
         this.ownerUID = ownerUID;
     }
 
-    private String ownerUID;
-    private String title;
-    private String author;
-    private String genre;
-    private double price;
-
-    public Book(String ownerUID, String title, String author, String genre, double price) {
-        this.ownerUID = ownerUID;
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-        this.price = price;
+    public String getImageURL() {
+        return imageURL;
     }
 
-
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 
     public String getTitle() {
         return title;

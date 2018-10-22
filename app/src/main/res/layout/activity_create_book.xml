@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text='Book Name ex. "1984"'
+            android:hint='Book Name ex. "1984"'
             android:ems="10"
             tools:layout_editor_absoluteX="85dp"
             android:id="@+id/bookName"
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text='Book Author ex. "George Orwell"'
+            android:hint='Book Author ex. "George Orwell"'
             android:ems="10"
             android:id="@+id/authorName" android:textAlignment="center"/>
     <LinearLayout
@@ -72,6 +72,25 @@
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/bookPrice" android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:padding="5dp"
+            android:orientation="horizontal"
+            android:paddingBottom="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:padding="10dp"
+                android:text="Image URL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/bookImageText" android:layout_weight="1"/>
+        <EditText
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/bookImageUrlEditText" android:layout_weight="1"/>
     </LinearLayout>
 
     <Button
