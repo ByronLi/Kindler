@@ -4,11 +4,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.List;
 import java.util.ArrayList;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import android.util.Log;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
 public class MainActivity extends AppCompatActivity {
 
     private SwipeCardsView swipecardsView;
-    private List<Model> modelList = new ArrayList<>();
+    private List<Model> modelList = new ArrayList<>(); // list for the feed
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,10 +27,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getData(){
-        modelList.add(new Model("Harry Potter 1","https://vignette.wikia.nocookie.net/harrypotter/images/0/0e/Philostone.jpg/revision/latest?cb=20180318153750"));
-        modelList.add(new Model("50 shades of grey","https://m.media-amazon.com/images/M/MV5BMjE1MTM4NDAzOF5BMl5BanBnXkFtZTgwNTMwNjI0MzE@._V1_.jpg"));
-        modelList.add(new Model("To kill a mockingbird", "https://images-na.ssl-images-amazon.com/images/I/71FxgtFKcQL.jpg"));
-        modelList.add(new Model("Hunger games", "https://upload.wikimedia.org/wikipedia/en/thumb/3/39/The_Hunger_Games_cover.jpg/220px-The_Hunger_Games_cover.jpg"));
+        DatabaseReference mDatabase;
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        // Read from the database
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+            @Override
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                       // System.out.println(snapshot.toString());
+                        Model curr_model = snapshot.getValue(Model.class);
+                        modelList.add(curr_model);
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+
+        //modelList.add(new Model("Harry Potter 1","https://vignette.wikia.nocookie.net/harrypotter/images/0/0e/Philostone.jpg/revision/latest?cb=20180318153750"));
+        //modelList.add(new Model("50 shades of grey","https://m.media-amazon.com/images/M/MV5BMjE1MTM4NDAzOF5BMl5BanBnXkFtZTgwNTMwNjI0MzE@._V1_.jpg"));
+        //modelList.add(new Model("To kill a mockingbird", "https://images-na.ssl-images-amazon.com/images/I/71FxgtFKcQL.jpg"));
+        //modelList.add(new Model("Hunger games", "https://upload.wikimedia.org/wikipedia/en/thumb/3/39/The_Hunger_Games_cover.jpg/220px-The_Hunger_Games_cover.jpg"));
         FeedAdapter cardAdapter = new FeedAdapter(modelList,this);
         swipecardsView.setAdapter(cardAdapter);
     }
