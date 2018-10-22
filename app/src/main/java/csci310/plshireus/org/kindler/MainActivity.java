@@ -1,7 +1,12 @@
 package csci310.plshireus.org.kindler;
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.view.View;
 import com.huxq17.swipecardsview.SwipeCardsView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import csci310.plshireus.org.kindler.objects.Model;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -18,6 +23,17 @@ public class MainActivity extends AppCompatActivity {
         swipecardsView.retainLastCard(false);
         swipecardsView.enableSwipe(true);
         getData();
+
+        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.addBookButton);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createBook = new Intent(getApplicationContext(), CreateBook.class);
+                startActivity(createBook);
+            }
+        });
+
     }
 
     private void getData(){
@@ -28,4 +44,8 @@ public class MainActivity extends AppCompatActivity {
         FeedAdapter cardAdapter = new FeedAdapter(modelList,this);
         swipecardsView.setAdapter(cardAdapter);
     }
+
+
+
+
 }
