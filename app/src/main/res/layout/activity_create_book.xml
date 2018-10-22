@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CreateBook">
+
+    <TextView
+            android:text="Create a Book Listing"
+            android:paddingTop="10dp"
+            android:paddingBottom="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="118dp"
+            android:id="@+id/textView2"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textColor="#000"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint='Book Name ex. "1984"'
+            android:ems="10"
+            tools:layout_editor_absoluteX="85dp"
+            android:id="@+id/bookName"
+            android:paddingTop="10dp"
+            android:padding="10dp"
+            android:textAlignment="center"/>
+    <EditText
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint='Book Author ex. "George Orwell"'
+            android:ems="10"
+            android:id="@+id/authorName" android:textAlignment="center"/>
+    <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:padding="10dp"
+                android:text="Genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView3"/>
+        <Spinner
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/spinnerGenres"
+                android:dropDownWidth="match_parent"/>
+
+    </LinearLayout>
+    <LinearLayout
+            android:padding="5dp"
+            android:orientation="horizontal"
+            android:paddingBottom="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:padding="10dp"
+                android:text="Price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textViewPrice" android:layout_weight="1"/>
+        <EditText
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/bookPrice" android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:padding="5dp"
+            android:orientation="horizontal"
+            android:paddingBottom="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:padding="10dp"
+                android:text="Image URL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/bookImageText" android:layout_weight="1"/>
+        <EditText
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/bookImageUrlEditText" android:layout_weight="1"/>
+    </LinearLayout>
+
+    <Button
+            android:padding="10dp"
+            android:text="Create Listing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/createBookButton"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            android:textAlignment="center" android:textSize="12sp"/>
+
+</LinearLayout>

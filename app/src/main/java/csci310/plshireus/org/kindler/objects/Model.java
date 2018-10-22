@@ -1,4 +1,4 @@
-package csci310.plshireus.org.kindler;
+package csci310.plshireus.org.kindler.objects;
 
 public class Model {
     public String title, image;

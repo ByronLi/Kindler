@@ -6,6 +6,7 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
+import csci310.plshireus.org.kindler.objects.Model;
 
 
 public class FeedAdapter extends BaseCardAdapter{

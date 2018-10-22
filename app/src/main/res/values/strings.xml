@@ -22,4 +22,48 @@
         https://firebasestorage.googleapis.com/v0/b/kindler-2e035.appspot.com/o/tinder-logo.png?alt=media&amp;token=d104b4af-5344-4f87-b51a-9c5c2d9bede3
     </string>
 
+    <string-array name="genres">
+        <item>Art</item>
+        <item>Biography</item>
+        <item>Business</item>
+        <item>Chick Lit</item>
+        <item>Children's</item>
+        <item>Christian</item>
+        <item>Classics</item>
+        <item>Comics</item>
+        <item>Contemporary</item>
+        <item>Cookbooks</item>
+        <item>Crime</item>
+        <item>Ebooks</item>
+        <item>Fantasy</item>
+        <item>Fiction</item>
+        <item>Gay and Lesbian</item>
+        <item>Graphic Novels</item>
+        <item>Historical Fiction</item>
+        <item>History</item>
+        <item>Horror</item>
+        <item>Humor and Comedy</item>
+        <item>Manga</item>
+        <item>Memoir</item>
+        <item>Music</item>
+        <item>Mystery</item>
+        <item>Nonfiction</item>
+        <item>Other></item>
+        <item>Paranormal</item>
+        <item>Philosophy</item>
+        <item>Poetry</item>
+        <item>Psychology</item>
+        <item>Religion</item>
+        <item>Romance</item>
+        <item>Science</item>
+        <item>Science Fiction</item>
+        <item>Self Help</item>
+        <item>Suspense</item>
+        <item>Spirituality</item>
+        <item>Sports</item>
+        <item>Thriller</item>
+        <item>Travel</item>
+        <item>Young Adult</item>
+    </string-array>
+
 </resources>

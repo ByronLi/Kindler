@@ -2,36 +2,36 @@ package csci310.plshireus.org.kindler.objects;
 
 public class Book {
 
-    private int bookID;
-    private User owner;
+    private String ownerUID;
     private String title;
     private String author;
     private String genre;
     private double price;
+    private String imageURL;
 
-    public Book(int bookID, User owner, String title, String author, String genre, double price) {
-        this.bookID = bookID;
-        this.owner = owner;
+    public Book(String ownerUID, String title, String author, String genre, double price, String imageURL) {
+        this.ownerUID = ownerUID;
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.price = price;
+        this.imageURL = imageURL;
     }
 
-    public int getBookID() {
-        return bookID;
+    public String getOwnerUID() {
+        return ownerUID;
     }
 
-    public void setBookID(int bookID) {
-        this.bookID = bookID;
+    public void setOwnerUID(String ownerUID) {
+        this.ownerUID = ownerUID;
     }
 
-    public User getOwner() {
-        return owner;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getTitle() {
