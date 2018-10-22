@@ -1,11 +1,19 @@
 package csci310.plshireus.org.kindler.objects;
 
 public class Model {
-    public String title, image;
+    public String author, genre, imageURL, ownerUID, price, title;
 
-    public Model(String title, String image){
+    public Model(String author, String genre, String imageURL, String ownerUID, String price, String title){
+        this.author = author;
+        this.genre = genre;
+        this.imageURL = imageURL;
+        this.ownerUID = ownerUID;
+        this.price = price;
         this.title = title;
-        this.image = image;
+    }
+    public Model(String title, String imageURL){
+        this.title = title;
+        this.imageURL = imageURL;
     }
 
     public String getTitle(){
@@ -17,9 +25,8 @@ public class Model {
     }
 
     public String getImage(){
-        return image;
+        return imageURL;
     }
-    public void setImage(){
-        this.image = image;
-    }
+
+
 }

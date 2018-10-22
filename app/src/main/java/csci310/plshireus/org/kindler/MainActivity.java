@@ -43,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getData(){
-        DatabaseReference mDatabase;
+       /* DatabaseReference mDatabase;
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference("books");
 
         // Read from the database
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
 
 
             @Override
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
                 if(dataSnapshot.exists()){
                     for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                       // System.out.println(snapshot.toString());
+                        System.out.println(snapshot.toString());
                         Model curr_model = snapshot.getValue(Model.class);
                         modelList.add(curr_model);
                     }
@@ -71,11 +71,11 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
 
             }
-        });
+        }); */
 
-        //modelList.add(new Model("Harry Potter 1","https://vignette.wikia.nocookie.net/harrypotter/images/0/0e/Philostone.jpg/revision/latest?cb=20180318153750"));
+        modelList.add(new Model("JKROWLING","fantasy", "https://vignette.wikia.nocookie.net/harrypotter/images/0/0e/Philostone.jpg/revision/latest?cb=20180318153750", "fd", "100", "Harry Potter"));
         //modelList.add(new Model("50 shades of grey","https://m.media-amazon.com/images/M/MV5BMjE1MTM4NDAzOF5BMl5BanBnXkFtZTgwNTMwNjI0MzE@._V1_.jpg"));
-        //modelList.add(new Model("To kill a mockingbird", "https://images-na.ssl-images-amazon.com/images/I/71FxgtFKcQL.jpg"));
+        modelList.add(new Model("To kill a mockingbird", "https://images-na.ssl-images-amazon.com/images/I/71FxgtFKcQL.jpg"));
         //modelList.add(new Model("Hunger games", "https://upload.wikimedia.org/wikipedia/en/thumb/3/39/The_Hunger_Games_cover.jpg/220px-The_Hunger_Games_cover.jpg"));
         FeedAdapter cardAdapter = new FeedAdapter(modelList,this);
         swipecardsView.setAdapter(cardAdapter);
