@@ -3,7 +3,7 @@ package csci310.plshireus.org.kindler.objects;
 public class Model {
     public String author, genre, imageURL, ownerUID, price, title;
 
-    public Model(String author, String genre, String imageURL, String ownerUID, String price, String title){
+    public Model(String author, String price, String imageURL, String genre, String ownerUID, String title){
         this.author = author;
         this.genre = genre;
         this.imageURL = imageURL;
@@ -14,6 +14,14 @@ public class Model {
     public Model(String title, String imageURL){
         this.title = title;
         this.imageURL = imageURL;
+    }
+    public Model(){
+        this.author = "dummmy";
+        this.genre = "dummy";
+        this.imageURL = "https://vignette.wikia.nocookie.net/starwars/images/0/07/Yoda_cartoon.jpg/revision/latest?cb=20050421025718";
+        this.ownerUID = "dummy";
+        this.price = "1000000";
+        this.title = "dummy title";
     }
 
     public String getTitle(){

@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import csci310.plshireus.org.kindler.objects.Model;
-
+import android.widget.BaseAdapter;
 
 public class FeedAdapter extends BaseCardAdapter{
     private List<Model> modelList;
@@ -18,7 +18,10 @@ public class FeedAdapter extends BaseCardAdapter{
         this.context = context;
 
     }
+    public void updateList(List<Model> modelList){
+        this.modelList = modelList;
 
+    }
     public int getCount(){
         return modelList.size();
 

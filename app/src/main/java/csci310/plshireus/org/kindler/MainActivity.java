@@ -19,7 +19,8 @@ import com.google.firebase.database.DatabaseError;
 public class MainActivity extends AppCompatActivity {
 
     private SwipeCardsView swipecardsView;
-    private List<Model> modelList = new ArrayList<>(); // list for the feed
+    private FeedAdapter cardAdapter;
+    private List<Model> modelList; // list for the feed
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +29,12 @@ public class MainActivity extends AppCompatActivity {
         swipecardsView = (SwipeCardsView)findViewById(R.id.swipeCardsView);
         swipecardsView.retainLastCard(false);
         swipecardsView.enableSwipe(true);
+        modelList = new ArrayList<>();
+
         getData();
+        cardAdapter = new FeedAdapter(modelList,this);
+        swipecardsView.setAdapter(cardAdapter);
+
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.addBookButton);
 
@@ -43,26 +49,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getData(){
-       /* DatabaseReference mDatabase;
-
-        mDatabase = FirebaseDatabase.getInstance().getReference("books");
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = mDatabase.getReference("books");
 
         // Read from the database
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
 
 
             @Override
-
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                if(dataSnapshot.exists()){
+
                     for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                        System.out.println(snapshot.toString());
-                        Model curr_model = snapshot.getValue(Model.class);
+                        //System.out.println("-------------@@@@@@--------------");
+                        //System.out.println(snapshot.getValue().toString());
+
+                        String tit = (String) snapshot.child("title").getValue();
+                        String img = (String) snapshot.child("imageURL").getValue();
+
+                        Model curr_model = new Model(tit, img);
+                        System.out.println("-------------@@@@@@--------------");
+                        System.out.println(curr_model.title);
+                        //Model curr_model = snapshot.getValue(Model.class);
+                        //System.out.println(curr_model.title);
                         modelList.add(curr_model);
+                        modelList.add(new Model());
+                        cardAdapter.updateList(modelList);
+
+
                     }
-                }
+
 
 
             }
@@ -71,14 +88,13 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
 
             }
-        }); */
+        });
 
-        modelList.add(new Model("JKROWLING","fantasy", "https://vignette.wikia.nocookie.net/harrypotter/images/0/0e/Philostone.jpg/revision/latest?cb=20180318153750", "fd", "100", "Harry Potter"));
+       // modelList.add(new Model("JKROWLING","fantasy", "https://vignette.wikia.nocookie.net/harrypotter/images/0/0e/Philostone.jpg/revision/latest?cb=20180318153750", "fd", "100", "Harry Potter"));
         //modelList.add(new Model("50 shades of grey","https://m.media-amazon.com/images/M/MV5BMjE1MTM4NDAzOF5BMl5BanBnXkFtZTgwNTMwNjI0MzE@._V1_.jpg"));
-        modelList.add(new Model("To kill a mockingbird", "https://images-na.ssl-images-amazon.com/images/I/71FxgtFKcQL.jpg"));
+        //modelList.add(new Model("To kill a mockingbird", "https://images-na.ssl-images-amazon.com/images/I/71FxgtFKcQL.jpg"));
         //modelList.add(new Model("Hunger games", "https://upload.wikimedia.org/wikipedia/en/thumb/3/39/The_Hunger_Games_cover.jpg/220px-The_Hunger_Games_cover.jpg"));
-        FeedAdapter cardAdapter = new FeedAdapter(modelList,this);
-        swipecardsView.setAdapter(cardAdapter);
+
     }
 
 
