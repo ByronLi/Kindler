@@ -15,12 +15,13 @@ import android.util.Log;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import java.util.concurrent.CountDownLatch;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SwipeCardsView swipecardsView;
-    private FeedAdapter cardAdapter;
-    private List<Model> modelList; // list for the feed
+    public SwipeCardsView swipecardsView;
+    public FeedAdapter cardAdapter;
+    public List<Model> modelList; // list for the feed
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +30,10 @@ public class MainActivity extends AppCompatActivity {
         swipecardsView = (SwipeCardsView)findViewById(R.id.swipeCardsView);
         swipecardsView.retainLastCard(false);
         swipecardsView.enableSwipe(true);
+
         modelList = new ArrayList<>();
 
         getData();
-        cardAdapter = new FeedAdapter(modelList,this);
-        swipecardsView.setAdapter(cardAdapter);
-
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.addBookButton);
 
@@ -49,12 +48,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getData(){
+
+        //wait until data is retrieved from the database
+
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = mDatabase.getReference("books");
 
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
-
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -62,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
 
                     for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                        //System.out.println("-------------@@@@@@--------------");
-                        //System.out.println(snapshot.getValue().toString());
 
                         String tit = (String) snapshot.child("title").getValue();
                         String img = (String) snapshot.child("imageURL").getValue();
@@ -71,17 +70,11 @@ public class MainActivity extends AppCompatActivity {
                         Model curr_model = new Model(tit, img);
                         System.out.println("-------------@@@@@@--------------");
                         System.out.println(curr_model.title);
-                        //Model curr_model = snapshot.getValue(Model.class);
-                        //System.out.println(curr_model.title);
+
                         modelList.add(curr_model);
                         modelList.add(new Model());
-                        cardAdapter.updateList(modelList);
-
 
                     }
-
-
-
             }
 
             @Override
@@ -90,14 +83,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-       // modelList.add(new Model("JKROWLING","fantasy", "https://vignette.wikia.nocookie.net/harrypotter/images/0/0e/Philostone.jpg/revision/latest?cb=20180318153750", "fd", "100", "Harry Potter"));
+        //System.out.println("model list has this many members after: " + modelList.size());
+        //modelList.add(new Model("JKROWLING","fantasy", "https://vignette.wikia.nocookie.net/harrypotter/images/0/0e/Philostone.jpg/revision/latest?cb=20180318153750", "fd", "100", "Harry Potter"));
 
       //  modelList.add(new Model("Harry Potter 1","https://vignette.wikia.nocookie.net/harrypotter/images/0/0e/Philostone.jpg/revision/latest?cb=20180318153750"));
 
         //modelList.add(new Model("50 shades of grey","https://m.media-amazon.com/images/M/MV5BMjE1MTM4NDAzOF5BMl5BanBnXkFtZTgwNTMwNjI0MzE@._V1_.jpg"));
         //modelList.add(new Model("To kill a mockingbird", "https://images-na.ssl-images-amazon.com/images/I/71FxgtFKcQL.jpg"));
         //modelList.add(new Model("Hunger games", "https://upload.wikimedia.org/wikipedia/en/thumb/3/39/The_Hunger_Games_cover.jpg/220px-The_Hunger_Games_cover.jpg"));
+
+        cardAdapter = new FeedAdapter(modelList,this);
+        swipecardsView.setAdapter(cardAdapter);
 
     }
 
