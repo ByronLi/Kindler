@@ -6,23 +6,43 @@
     android:layout_height="match_parent"
     tools:context="csci310.plshireus.org.kindler.MainActivity">
 
+    <Button
+        android:id="@+id/refreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="11dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/refresh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <android.support.design.widget.FloatingActionButton
-            android:id="@+id/addBookButton"
-            android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_gravity="end|bottom"
-            android:src="@drawable/add"
-            android:layout_margin="16dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" app:layout_constraintBottom_toBottomOf="@+id/swipeCardsView"
-            android:layout_marginBottom="16dp"/>
+        android:id="@+id/addBookButton"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/add"
+        app:layout_constraintBottom_toBottomOf="@+id/swipeCardsView"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.huxq17.swipecardsview.SwipeCardsView
         android:id="@+id/swipeCardsView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="#f3f3f3"
-        android:layout_width= "match_parent"
-        android:layout_height="wrap_content"
         app:alphaOffsetStep="20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:scaleOffsetStep="0.08"
-        app:yOffsetStep="20dp"
-    ></com.huxq17.swipecardsview.SwipeCardsView>
+        app:yOffsetStep="20dp">
+
+    </com.huxq17.swipecardsview.SwipeCardsView>
+
 </android.support.constraint.ConstraintLayout>
