@@ -25,12 +25,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
+    
+    testCompile 'io.cucumber:cucumber-java:4.0.0'
+    testCompile 'io.cucumber:cucumber-junit:4.0.0'
 
     implementation 'com.google.firebase:firebase-core:16.0.4'
 
     implementation 'com.android.support:appcompat-v7:26.0.1'
     implementation 'com.android.support:design:26.0.1'
+    
 //    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 //    compile 'com.android.support:design:25.2.0'
     implementation 'com.google.firebase:firebase-auth:16.0.4'
