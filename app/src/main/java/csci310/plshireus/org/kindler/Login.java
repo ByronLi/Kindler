@@ -106,7 +106,7 @@ public class Login extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     @SuppressWarnings("Duplicates")
-    private void attemptLogin() {
+    public void attemptLogin() {
         if (mAuthTask != null) {
             return;
         }
@@ -291,6 +291,10 @@ public class Login extends AppCompatActivity {
             // Show keyboard
             //imm.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
         }
+    }
+
+    public FirebaseUser getFirebaseUser(){
+        return FirebaseAuth.getInstance().getCurrentUser();
     }
 
 
