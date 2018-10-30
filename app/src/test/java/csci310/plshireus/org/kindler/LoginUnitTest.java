@@ -3,17 +3,17 @@ package csci310.plshireus.org.kindler;
 import android.text.Editable;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.internal.matchers.Any;
 
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -29,13 +29,9 @@ public class LoginUnitTest {
     public void setUp(){
         l = mock(Login.class);
     }
-    @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
-    }
 
     @Test
-    public void TestLoginSuccess(){
+    public void TestAttemptLoginSuccess(){
 
         AutoCompleteTextView mEmailView = mock(AutoCompleteTextView.class);
         EditText mPasswordView = mock(EditText.class);
@@ -55,8 +51,26 @@ public class LoginUnitTest {
 
         when(l.getFirebaseUser()).thenCallRealMethod();
 
-        l.attemptLogin();
+        //TODO: Will eventually have to refactor, too much coupling
+        doCallRealMethod().when(l).attemptLogin();
 
-        assert(l.getFirebaseUser() != null);
+    }
+
+    @Test
+    public void TestEmailCheckSuccess(){
+
+        //setup real call
+        when(l.isEmailValid(Mockito.anyString())).thenCallRealMethod();
+
+        assert(l.isEmailValid("a@a.com"));
+    }
+
+    @Test
+    public void TestPasswordCheckSuccess(){
+
+        //setup real call
+        when(l.isPasswordValid(Mockito.anyString())).thenCallRealMethod();
+
+        assert(l.isPasswordValid("abc123"));
     }
 }

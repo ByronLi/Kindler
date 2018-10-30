@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -154,11 +155,11 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    private boolean isEmailValid(String email) {
+    public boolean isEmailValid(String email) {
         return email.contains("@");
     }
 
-    private boolean isPasswordValid(String password) {
+    public boolean isPasswordValid(String password) {
         return password.length() > 3;
     }
 
@@ -293,8 +294,9 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    public FirebaseUser getFirebaseUser(){
-        return FirebaseAuth.getInstance().getCurrentUser();
+    public String getFirebaseUser(){
+        FirebaseApp.initializeApp(this);
+        return FirebaseAuth.getInstance().getCurrentUser().getEmail();
     }
 
 
