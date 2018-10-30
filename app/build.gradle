@@ -11,8 +11,6 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        //espresso instrumentation runner
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -53,7 +51,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test:rules:1.1.0'
-    
+
 //    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 //    compile 'com.android.support:design:25.2.0'
     implementation 'com.google.firebase:firebase-auth:16.0.4'
