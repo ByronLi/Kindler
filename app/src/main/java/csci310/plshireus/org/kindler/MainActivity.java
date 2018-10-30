@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     public SwipeCardsView swipecardsView;
     public FeedAdapter cardAdapter;
-    public List<Model> modelList; // list for the feed
+    public List<Model> modelList = new ArrayList<>(); // list for the feed
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void getData(){
+    public void getData(){
 
         //wait until data is retrieved from the database
 
