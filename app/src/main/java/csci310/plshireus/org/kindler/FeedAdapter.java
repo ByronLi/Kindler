@@ -18,6 +18,9 @@ public class FeedAdapter extends BaseCardAdapter{
         this.context = context;
 
     }
+    public FeedAdapter(List<Model> modelList){
+        this.modelList = modelList;
+    }
     public void updateList(List<Model> modelList){
         this.modelList = modelList;
 
