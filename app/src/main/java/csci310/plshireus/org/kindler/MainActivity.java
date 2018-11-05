@@ -48,9 +48,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button fab2 = (Button) findViewById(R.id.refreshButton);
+        Button refreshButton = (Button) findViewById(R.id.refreshButton);
+        refreshButton.setText("Refresh");
 
-        fab2.setOnClickListener(new View.OnClickListener() {
+        refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
