@@ -55,7 +55,10 @@ public class CreateBook extends AppCompatActivity {
                     double price = Double.valueOf(bookPrice.getText().toString());
                     String url = bookImage.getText().toString();
 
-                    Book b = new Book(uid, title, author, genre, price, url);
+                    //**added current users email to the book so we can search
+                    String creatorsEmail =  FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                    Book b = new Book(uid, title, author, genre, price, url, creatorsEmail);
                     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                     DatabaseReference ref = firebaseDatabase.getReference("books");
                     DatabaseReference bookRef = ref.push();

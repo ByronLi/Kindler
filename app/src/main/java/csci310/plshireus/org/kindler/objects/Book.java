@@ -8,14 +8,16 @@ public class Book {
     private String genre;
     private double price;
     private String imageURL;
+    private String ownerEmail;
 
-    public Book(String ownerUID, String title, String author, String genre, double price, String imageURL) {
+    public Book(String ownerUID, String title, String author, String genre, double price, String imageURL, String ownerEmail) {
         this.ownerUID = ownerUID;
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.price = price;
         this.imageURL = imageURL;
+        this.ownerEmail = ownerEmail;
     }
 
     public String getOwnerUID() {
@@ -65,4 +67,6 @@ public class Book {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public String getOwnerEmail(){ return ownerEmail; }
 }

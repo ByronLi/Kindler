@@ -1,5 +1,7 @@
 package csci310.plshireus.org.kindler.objects;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Model {
     public String author, genre, imageURL, ownerUID, price, title;
 
@@ -35,6 +37,7 @@ public class Model {
     public String getImage(){
         return imageURL;
     }
+
 
 
 }
