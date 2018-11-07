@@ -38,11 +38,19 @@ public class FeedAdapter extends BaseCardAdapter{
         if(modelList == null|| modelList.size() ==0){
             return;
         }
-        ImageView imageview = (ImageView) cardview.findViewById(R.id.imageView);
-        TextView textview = (TextView) cardview.findViewById(R.id.textView);
-        Model model = modelList.get(position);
-        textview.setText(model.getTitle());
-        Picasso.with(context).load(model.getImage()).into(imageview);
+        try{
+            ImageView imageview = (ImageView) cardview.findViewById(R.id.imageView);
+            TextView textview = (TextView) cardview.findViewById(R.id.textView);
+            Model model = modelList.get(position);
+            textview.setText(model.getTitle());
+            Picasso.with(context).load(model.getImage()).into(imageview);
+        }catch(Exception e){
+            System.out.println("image cant be loaded");
+            TextView textview = (TextView) cardview.findViewById(R.id.textView);
+            Model model = modelList.get(position);
+            textview.setText(model.getTitle());
+        }
+
 
     }
 
