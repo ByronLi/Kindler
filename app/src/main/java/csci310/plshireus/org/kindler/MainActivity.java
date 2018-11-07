@@ -36,6 +36,35 @@ public class MainActivity extends AppCompatActivity {
 
         getData();
 
+        swipecardsView.setCardsSlideListener(new SwipeCardsView.CardsSlideListener() {
+            @Override
+            public void onShow(int index) {
+                //curIndex = index;
+               // LogUtils.i("test showing index = " + index);
+            }
+
+            @Override
+            public void onCardVanish(int index, SwipeCardsView.SlideType type) {
+                String orientation = "";
+                switch (type) {
+                    case LEFT:
+                        orientation = "向左飞出";
+                        System.out.println("HOLY SHET IT WENT LEFT");
+                        break;
+                    case RIGHT:
+                        orientation = "向右飞出";
+                        System.out.println("HOLY SHET IT WENT RIGHT");
+                        break;
+                }
+//                toast("test position = "+index+";卡片"+orientation);
+            }
+
+            @Override
+            public void onItemClick(View cardImageView, int index) {
+                //toast("position= " + index);
+            }
+        });
+
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.addBookButton);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent createBook = new Intent(getApplicationContext(), CreateBook.class);
                 startActivity(createBook);
 
-                //swipecardsView.setAdapter(cardAdapter); //this is what shows the feed
             }
         });
 
@@ -61,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     public void getData(){
 
@@ -112,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         swipecardsView.setAdapter(cardAdapter);
 
     }
+
 
 
 

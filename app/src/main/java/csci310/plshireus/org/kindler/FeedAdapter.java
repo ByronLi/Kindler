@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import csci310.plshireus.org.kindler.objects.Model;
 import android.widget.BaseAdapter;
+import com.huxq17.swipecardsview.SwipeCardsView;
 
 public class FeedAdapter extends BaseCardAdapter{
     private List<Model> modelList;
@@ -29,6 +30,7 @@ public class FeedAdapter extends BaseCardAdapter{
         return modelList.size();
 
     }
+
 
     public int getCardLayoutId(){
         return R.layout.feed_item;
