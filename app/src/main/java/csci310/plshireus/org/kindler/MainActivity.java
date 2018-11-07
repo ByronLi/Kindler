@@ -45,15 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCardVanish(int index, SwipeCardsView.SlideType type) {
-                String orientation = "";
                 switch (type) {
                     case LEFT:
-                        orientation = "向左飞出";
                         System.out.println("HOLY SHET IT WENT LEFT");
+                        System.out.println("this book is named: " + modelList.get(index).getTitle());
                         break;
                     case RIGHT:
-                        orientation = "向右飞出";
                         System.out.println("HOLY SHET IT WENT RIGHT");
+                        System.out.println("this book is named: " + modelList.get(index).getTitle());
                         break;
                 }
 //                toast("test position = "+index+";卡片"+orientation);
