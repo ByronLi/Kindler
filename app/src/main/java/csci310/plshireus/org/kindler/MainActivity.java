@@ -63,10 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
                         //then when i check for matches, i can just check if your name is in
                         //their list and their name is in your list
-                        boolean match = checkMatch();
-                        if(match){
-                            System.out.println("Current user matched!");
-                        }
+                        checkMatch();
+
                         break;
                 }
 //                toast("test position = "+index+";"+orientation);
@@ -155,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public boolean checkMatch(){
+    public void checkMatch(){
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = mDatabase.getReference("Users");
 
@@ -170,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     String curr_email = (String) snapshot.child("email").getValue();
-                    if(curr_email.equals(creatorsEmail)){
+                    if(curr_email.equals(creatorsEmail)){ //this is how i get the curr user info from database
                         System.out.println("----HERE ARE THE PPL I SWIPED RIGHT ON---");
                         //Object snap = snapshot.child("swipedRightOn").child("email");
                         String parseThis = snapshot.child("swipedRightOn").child("emails").getValue().toString();
@@ -203,8 +201,17 @@ public class MainActivity extends AppCompatActivity {
 
                             //printing out purely emails
                             System.out.println(swipedEmails[i]);
+
+                            //LOOP THROUGH ALL swipedEmails[i] and see if curr email is in their swiped right on
+                            //takes curr email, and swipedEmails[i] as parameters
+                            //loops through all database users and checks if their swipedright on
+                            //has curr email, if so, create a match
+
+                            //** can make this better by using a array of swiped right on so method
+                            //only needs to be called once
+                            checkMatchUtil(swipedEmails[i], curr_email);
                         }
-                        //pasre this and separate
+                        //parse this and separate
 
 
                     }
@@ -217,7 +224,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        return false;
+    }
+
+    public void checkMatchUtil(final String swipedEmail,final String swiper){
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = mDatabase.getReference("Users");
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    String curr_email = (String) snapshot.child("email").getValue();
+                    if (curr_email.equals(swipedEmail)) {
+                        String SwipedEmail_swipes = snapshot.child("swipedRightOn").child("emails").getValue().toString();
+                        if(SwipedEmail_swipes.contains(swiper)){
+                            System.out.println("------------------~~~~~~~~~~----------------");
+                            System.out.println(curr_email + " and " + swiper + " have matched!!!");
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
 
