@@ -1,7 +1,10 @@
 package csci310.plshireus.org.kindler;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.huxq17.swipecardsview.SwipeCardsView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,13 +52,24 @@ public class MainActivity extends AppCompatActivity {
                     case LEFT:
                         System.out.println("HOLY SHET IT WENT LEFT");
                         System.out.println("this book is named: " + modelList.get(index).getTitle());
+
                         break;
                     case RIGHT:
                         System.out.println("HOLY SHET IT WENT RIGHT");
                         System.out.println("this book is named: " + modelList.get(index).getTitle());
+
+                        //**need to add book to users swiped right firebase database
+                        //or at least the owners email
+
+                        //then when i check for matches, i can just check if your name is in
+                        //their list and their name is in your list
+                        boolean match = checkMatch();
+                        if(match){
+                            System.out.println("Current user matched!");
+                        }
                         break;
                 }
-//                toast("test position = "+index+";卡片"+orientation);
+//                toast("test position = "+index+";"+orientation);
             }
 
             @Override
@@ -138,6 +152,72 @@ public class MainActivity extends AppCompatActivity {
 
         cardAdapter = new FeedAdapter(modelList,this);
         swipecardsView.setAdapter(cardAdapter);
+
+    }
+
+    public boolean checkMatch(){
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = mDatabase.getReference("Users");
+
+        //current user
+        final String creatorsEmail =  FirebaseAuth.getInstance().getCurrentUser().getEmail();
+       // if(myRef.child("email").equals(creatorsEmail))
+
+        //** use a singlevalueevntlistener to loop through all the children
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    String curr_email = (String) snapshot.child("email").getValue();
+                    if(curr_email.equals(creatorsEmail)){
+                        System.out.println("----HERE ARE THE PPL I SWIPED RIGHT ON---");
+                        //Object snap = snapshot.child("swipedRightOn").child("email");
+                        String parseThis = snapshot.child("swipedRightOn").child("emails").getValue().toString();
+                        parseThis = parseThis.substring(1, parseThis.length()-1);
+                        String[] swipedEmails = parseThis.split(",");
+                        //System.out.println(snapshot.child("swipedRightOn").child("email").getValue());
+
+                        //how do i loop through each one of these?
+                        for(int i=0;i<swipedEmails.length;i++){
+                            System.out.println("split: ");
+                            swipedEmails[i] = swipedEmails[i].trim();
+
+                            //pos of equal is basically where the = is,
+                            //helps me parse the info from the database to get
+                            //only the email
+                            int pos_of_equal = -1;
+
+                            for(int j=0;j<swipedEmails[i].length();j++){
+                                if(swipedEmails[i].charAt(j) == '='){
+                                    //found the = sign
+                                    pos_of_equal = j;
+                                }
+                            }
+                            if(pos_of_equal >= 0){
+                                //array elements are purely emails after this point
+                                swipedEmails[i] = swipedEmails[i].substring(pos_of_equal + 1);
+                            }else{
+                                System.out.println("Email was not initialized correctly for swiped right on");
+                            }
+
+                            //printing out purely emails
+                            System.out.println(swipedEmails[i]);
+                        }
+                        //pasre this and separate
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return false;
 
     }
 
