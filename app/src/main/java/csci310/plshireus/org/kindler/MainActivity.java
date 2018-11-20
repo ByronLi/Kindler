@@ -89,6 +89,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button viewProfileButton = (Button) findViewById(R.id.profileButton);
+        viewProfileButton.setText("View Profile");
+        viewProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent viewProfile = new Intent(getApplicationContext(), ViewProfile.class);
+                startActivity(viewProfile);
+            }
+        });
+
         Button refreshButton = (Button) findViewById(R.id.refreshButton);
         refreshButton.setText("Refresh");
 
