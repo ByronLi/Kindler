@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import java.util.concurrent.CountDownLatch;
+import java.util.HashMap;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public SwipeCardsView swipecardsView;
     public FeedAdapter cardAdapter;
     public List<Model> modelList = new ArrayList<>(); // list for the feed
+    public HashMap<String,List<String>> matches = new HashMap<String, List<String>>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +52,12 @@ public class MainActivity extends AppCompatActivity {
             public void onCardVanish(int index, SwipeCardsView.SlideType type) {
                 switch (type) {
                     case LEFT:
-                        System.out.println("HOLY SHET IT WENT LEFT");
+                        System.out.println("IT WENT LEFT");
                         System.out.println("this book is named: " + modelList.get(index).getTitle());
 
                         break;
                     case RIGHT:
-                        System.out.println("HOLY SHET IT WENT RIGHT");
+                        System.out.println("IT WENT RIGHT");
                         System.out.println("this book is named: " + modelList.get(index).getTitle());
 
                         //**need to add book to users swiped right firebase database
@@ -192,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                                     pos_of_equal = j;
                                 }
                             }
-                            if(pos_of_equal >= 0){
+                            if(pos_of_equal >= 0){ //checking if "=" exists
                                 //array elements are purely emails after this point
                                 swipedEmails[i] = swipedEmails[i].substring(pos_of_equal + 1);
                             }else{
@@ -233,6 +235,7 @@ public class MainActivity extends AppCompatActivity {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
                     String curr_email = (String) snapshot.child("email").getValue();
                     if (curr_email.equals(swipedEmail)) {
@@ -240,9 +243,12 @@ public class MainActivity extends AppCompatActivity {
                         if(SwipedEmail_swipes.contains(swiper)){
                             System.out.println("------------------~~~~~~~~~~----------------");
                             System.out.println(curr_email + " and " + swiper + " have matched!!!");
+                            //add to array here
+                            addMatch(curr_email, swiper);
                         }
                     }
                 }
+                //return array here
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -251,6 +257,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    //updates the global matches data structure
+    public void addMatch(String e1, String e2){
+        if(matches.containsKey(e1)){
+            //add to the array
+            List temp = matches.get(e1);
+            temp.add(e2);
+            matches.put(e1, temp);
+        }else{
+            //create new pair
+            ArrayList<String> temp = new ArrayList<String>();
+            temp.add(e2);
+            matches.put(e1,temp);
+        }
     }
 
 
