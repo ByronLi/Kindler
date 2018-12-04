@@ -28,6 +28,8 @@
         </activity>
         <activity android:name=".CreateBook">
         </activity>
+        <activity android:name=".ViewProfile">
+        </activity>
     </application>
 
 </manifest>

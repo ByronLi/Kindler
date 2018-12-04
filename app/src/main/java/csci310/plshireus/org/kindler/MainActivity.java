@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public SwipeCardsView swipecardsView;
     public FeedAdapter cardAdapter;
     public List<Model> modelList = new ArrayList<>(); // list for the feed
-    public HashMap<String,List<String>> matches = new HashMap<String, List<String>>();
+    public static HashMap<String,List<String>> matches = new HashMap<String, List<String>>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         modelList = new ArrayList<>();
 
         getData();
+        checkMatch();
 
         swipecardsView.setCardsSlideListener(new SwipeCardsView.CardsSlideListener() {
             @Override
@@ -89,15 +90,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button viewProfileButton = (Button) findViewById(R.id.profileButton);
-        viewProfileButton.setText("View Profile");
-        viewProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent viewProfile = new Intent(getApplicationContext(), ViewProfile.class);
-                startActivity(viewProfile);
-            }
-        });
 
         Button refreshButton = (Button) findViewById(R.id.refreshButton);
         refreshButton.setText("Refresh");
@@ -107,6 +99,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 swipecardsView.setAdapter(cardAdapter); //this is what shows the feed
+            }
+        });
+
+        Button viewProfileButton = (Button) findViewById(R.id.profileButton);
+        viewProfileButton.setText("View Profile");
+        viewProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent viewProfile = new Intent(getApplicationContext(), ViewProfile.class);
+                startActivity(viewProfile);
             }
         });
 
@@ -165,7 +167,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void checkMatch(){
+    public static void checkMatch(){
+
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = mDatabase.getReference("Users");
 
@@ -183,6 +186,8 @@ public class MainActivity extends AppCompatActivity {
                     if(curr_email.equals(creatorsEmail)){ //this is how i get the curr user info from database
                         System.out.println("----HERE ARE THE PPL I SWIPED RIGHT ON---");
                         //Object snap = snapshot.child("swipedRightOn").child("email");
+
+
                         String parseThis = snapshot.child("swipedRightOn").child("emails").getValue().toString();
                         parseThis = parseThis.substring(1, parseThis.length()-1);
                         String[] swipedEmails = parseThis.split(",");
@@ -213,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
 
                             //printing out purely emails
                             System.out.println(swipedEmails[i]);
+                            ViewProfile.shit.add(swipedEmails[i]);
 
                             //LOOP THROUGH ALL swipedEmails[i] and see if curr email is in their swiped right on
                             //takes curr email, and swipedEmails[i] as parameters
@@ -238,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void checkMatchUtil(final String swipedEmail,final String swiper){
+    public static void checkMatchUtil(final String swipedEmail,final String swiper){
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = mDatabase.getReference("Users");
 
@@ -258,7 +264,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
-                //return array here
+
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -270,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //updates the global matches data structure
-    public void addMatch(String e1, String e2){
+    public static void addMatch(String e1, String e2){
         if(matches.containsKey(e1)){
             //add to the array
             List temp = matches.get(e1);
